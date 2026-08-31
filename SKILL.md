@@ -55,7 +55,9 @@ Use this structure for mode 2:
 **If you only fix one thing** — the single highest-leverage change.
 ```
 
-Then ask which findings the user wants applied (mode 3) if the work is in files you can edit.
+On very broken inputs, cap findings at ~8 and consolidate related problems into one finding — a review that lists twenty items buries the ones that matter.
+
+Then ask which findings the user wants applied (mode 3). If the code was pasted rather than in an editable file, offer the corrected version inline instead; separate the fixes you can make mechanically from the ones needing a product decision (e.g., when to ask for registration).
 
 ## Voice
 

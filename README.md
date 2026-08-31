@@ -38,7 +38,7 @@ The reference files load on demand, so the skill stays lightweight in context un
 **Claude Code (personal, all projects):**
 
 ```bash
-git clone https://github.com/adolfoforonda/lukew-design-skill.git ~/.claude/skills/lukew-design
+git clone https://github.com/nerdstalker/lukew-design-skill.git ~/.claude/skills/lukew-design
 ```
 
 **Claude Code (single project):** clone into `.claude/skills/lukew-design` inside the project instead.

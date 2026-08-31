@@ -16,7 +16,7 @@ Design for **one-handed use and partial attention**. If the core flow can't be c
 
 - Minimum touch target ~**44×44 px** (finger-pad size); primary actions larger. Space targets to prevent mis-taps.
 - Place primary, frequent actions in the natural **thumb arc** — the bottom of the screen. Put destructive actions out of easy reach.
-- As screens grew, thumb-zone logic justified **bottom navigation** even against platform guidelines — the Google+ case ("Obvious Always Wins") showed visible bottom tabs multiplied feature usage versus a hamburger menu. Data can license breaking convention.
+- As screens grew, thumb-zone logic justified **bottom navigation** even against platform guidelines — the Google+ case ("Obvious Always Wins") showed visible bottom tabs multiplied feature usage versus a hamburger menu. Data can license breaking convention. (Cite this qualitatively — the talk gives directional results, not a reusable percentage; don't attach invented numbers.)
 
 ## No hover dependence
 
