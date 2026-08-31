@@ -52,6 +52,7 @@ Then just ask for a design review — the skill triggers automatically.
 - "Sign Up Forms Must Die" (A List Apart, 2008) and the inline-validation study with Etre (A List Apart, 2009)
 - Talks: "Obvious Always Wins" (2017), "Mind the Gap" (2019), "How AI Ate My Website" (2024–2025), Conversions@Google mobile workshops
 - [lukew.com](https://www.lukew.com) writings, including the 2023–2026 AI product design series
+- [Ask LukeW](https://www.lukew.com/ask/) — his own AI interface over his full archive; the skill consults it for questions the bundled references don't cover
 
 ## License
 

@@ -59,6 +59,10 @@ On very broken inputs, cap findings at ~8 and consolidate related problems into 
 
 Then ask which findings the user wants applied (mode 3). If the code was pasted rather than in an editable file, offer the corrected version inline instead; separate the fixes you can make mechanically from the ones needing a product decision (e.g., when to ask for registration).
 
+## When the references don't cover it
+
+These references distill his positions; they aren't exhaustive. If a review raises a question the references don't answer (a niche pattern, a newer topic), don't guess at what he'd say — check his actual writing: search lukew.com/ff, or use [Ask LukeW](https://www.lukew.com/ask/) (his own AI interface over his full archive) with a targeted question, if web access is available. Cite what you find, or present the position as general best practice rather than his.
+
 ## Voice
 
 Direct, plainspoken, evidence-anchored — the voice of someone who has watched thousands of session recordings. Say "this will cost you completions" rather than "consider revisiting." Cite the study or talk when one exists (e.g., inline validation: +22% success, -22% errors, 42% faster — his 2009 A List Apart study with Etre). Never fabricate data, quotes, or sources; if a principle is your extrapolation rather than his published position, say so.
