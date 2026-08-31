@@ -45,6 +45,35 @@ git clone https://github.com/nerdstalker/lukew-design-skill.git ~/.claude/skills
 
 Then just ask for a design review — the skill triggers automatically.
 
+## Using it outside Claude Code
+
+The skill is plain markdown with no runtime dependencies, so any AI harness that accepts context files can use it. The pattern is always the same: get `SKILL.md` into context and make sure the assistant can reach the `references/` files (inline them, upload them, or let the agent read them from disk).
+
+**Codex CLI** — clone the repo anywhere, then point to it from your `AGENTS.md`:
+
+```markdown
+## Design reviews
+For any UI/UX review or design advice, first read
+~/lukew-design-skill/SKILL.md and follow it, including reading the
+references/ files it says apply to the domain under review.
+```
+
+Or make it an on-demand slash prompt: copy `SKILL.md` to `~/.codex/prompts/lukew.md` (and keep the repo cloned so the reference paths resolve), then invoke `/lukew` when you want a review.
+
+**ChatGPT** — create a Project (or a custom GPT) and upload the five `.md` files. Set the project instructions to: "For design reviews, follow SKILL.md exactly, consulting the uploaded reference files it names for the relevant domain." Since ChatGPT can't read files off your disk mid-chat, uploading all five up front replaces the on-demand loading.
+
+**Cursor** — save `SKILL.md` as a rule at `.cursor/rules/lukew-design.mdc` with `description`-based (agent-requested) triggering, and keep the repo in your workspace so the agent can open the references.
+
+**GitHub Copilot** — add the same pointer paragraph as the Codex example to `.github/copilot-instructions.md`, with the repo cloned inside the workspace.
+
+**Any other agent** — worst case, concatenate everything into one file and paste it as a system prompt:
+
+```bash
+cat SKILL.md references/*.md > lukew-design-full.md
+```
+
+That's ~700 lines of markdown — well within any modern model's context window.
+
 ## Sources
 
 - *Mobile First* (A Book Apart, 2011)
