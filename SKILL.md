@@ -24,6 +24,18 @@ Figure out which mode the user wants; when ambiguous, start with critique.
 
 For every Advise or Critique task, query the `lukew` MCP server before forming recommendations. Its archive includes Luke's writings, presentations, books and PDFs, video and audio transcripts, posts, images, and other published material.
 
+### Connection preflight
+
+Installing this skill does **not** register the MCP server. The `allowed-tools` names above reference tools; they do not install them. The endpoint is `https://www.lukew.com/mcp`.
+
+- Discover the host's available tools by capability as well as name: `search_content_by_similarity` and `search_content_by_keyword` may have host-specific prefixes or a different configured server name.
+- If the tools are missing or a request fails, read [MCP setup and troubleshooting](references/mcp-setup.md) before choosing fallback. Distinguish missing configuration, tools not loaded in this session, and a failed request. If configuration cannot be inspected, report that uncertainty; missing tools alone do not establish an outage.
+- Verify archive access with an actual search, normally the task query below. A configuration entry, successful handshake, or tool listing alone is not a successful search. An empty successful search means no matches, not a connection failure.
+- Send a short, abstract design question, not private agreement text, customer records, credentials, or proprietary source code.
+- Offer setup when needed, but do not change MCP configuration or permissions without authorization. An alternate client may be used only when permitted by the host and the user's scope, never to evade an authentication, network, or tool-policy restriction.
+
+### Source retrieval
+
 1. Turn the actual design problem, user context, and desired outcome into a compact, specific query. Search by semantic similarity and request about 5–8 results.
 2. When the task names a pattern, study, talk, quote, or distinctive phrase, also search by keyword. Do not add a keyword search when semantic results already answer the question well.
 3. Deduplicate mirrored files or near-identical passages, then select only the 2–4 sources that materially affect the recommendation. Prefer direct relevance over raw similarity score; for evolving topics such as AI interfaces, consider recency alongside relevance.
@@ -32,7 +44,7 @@ For every Advise or Critique task, query the `lukew` MCP server before forming r
 
 For Apply tasks, reuse the sources gathered during the critique. Query the archive again only when implementation raises a new design question.
 
-If the MCP server or its search tools are unavailable, continue with the bundled references and say briefly that the live LukeW archive could not be queried. Do not silently imply that the fallback references are a fresh archive search.
+If live retrieval remains unavailable after the permitted checks, label the result **Reference-only review**, state the observed reason and setup/retry option, and use the bundled references without implying a fresh archive search. If the user explicitly requires a live-archive review, report the blocker and ask whether to set up access or accept reference-only coverage; do not substitute fallback as completion of that request.
 
 ## Core philosophy (always in play)
 
