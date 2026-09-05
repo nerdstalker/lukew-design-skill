@@ -30,12 +30,17 @@ lukew-design/
     ├── forms.md                 # Web Form Design: labels, validation, errors, gradual engagement
     ├── mobile.md                # Mobile First: thumb zones, touch targets, content-first
     ├── data-informed.md         # Mind the Gap: metrics, the three gaps, find-the-bandaid
+    ├── mcp-setup.md             # connection diagnosis, verification, acceptance checks
     └── ai-interfaces.md         # 2023–2026 AI product patterns: citations, agent UIs, steering
 ```
 
 The reference files load on demand, so the skill stays lightweight in context until a review touches that domain. Live source retrieval comes from [`https://www.lukew.com/mcp`](https://www.lukew.com/mcp).
 
 ## Install
+
+Live archive access requires **two separate steps**: install the complete skill folder, then register the MCP server in the client you use. Cloning this repository, copying `SKILL.md`, or its `allowed-tools` field does not connect the archive. A connection configured in Claude Code does not automatically configure Codex.
+
+The commands below are for a new installation. If the skill folder or a LukeW connection already exists, inspect and reuse it instead of overwriting it or adding a duplicate. Keep `SKILL.md` beside its `references/` folder.
 
 **Claude Code (personal, all projects):**
 
@@ -50,13 +55,35 @@ claude mcp add --transport http lukew --scope user https://www.lukew.com/mcp
 claude mcp add --transport http lukew --scope project https://www.lukew.com/mcp
 ```
 
-Use `/mcp` in Claude Code to confirm the `lukew` server is connected. Then ask for a design review — the skill triggers automatically.
+Use `/mcp` in Claude Code to check the connection, then complete the search verification below.
+
+**Codex (personal skill):**
+
+```bash
+git clone https://github.com/nerdstalker/lukew-design-skill.git ~/.agents/skills/lukew-design
+codex mcp add lukew --url https://www.lukew.com/mcp
+codex mcp get lukew
+```
+
+For repository-scoped skill discovery, clone into `.agents/skills/lukew-design` instead. The MCP command above configures Codex separately; putting the skill in a repository does not make the MCP registration repository-scoped. If your installer already placed the skill in another supported location, keep that copy and only add the missing connection. Restart the relevant Codex client/session after configuration changes if the tools are not loaded. In the CLI, `/mcp` shows active servers.
+
+See the official [Codex skills](https://developers.openai.com/codex/skills), [Codex MCP](https://developers.openai.com/codex/mcp), and [Claude Code MCP](https://code.claude.com/docs/en/mcp) documentation for client-specific details.
+
+### Verify with a real search
+
+Ask your agent:
+
+> Use lukew-design to search the live LukeW archive for mobile form design. Report which search tool ran and one returned source title and URL. Do not substitute bundled references if the connection fails.
+
+Setup passes when an actual archive search succeeds and returns a source, not merely when the server appears in configuration or a tool list. If a valid query returns no matches, try the broad query above; no matches is not an outage. Tools may carry different prefixes in different hosts.
+
+If verification fails, follow [MCP setup and troubleshooting](references/mcp-setup.md). It distinguishes a missing connection from a failed request and includes fresh-install and failure-path acceptance checks. A fallback answer must be labeled **Reference-only review**; an explicitly live-archive request must not silently become a fallback review.
 
 ## Using it outside Claude Code
 
-The skill remains usable as plain markdown without MCP, using its bundled references as a clearly disclosed fallback. To get live source retrieval, the host must support remote HTTP MCP servers and connect `https://www.lukew.com/mcp` under the server name `lukew`. The MCP server exposes keyword and semantic-similarity search; MCP tool names may vary by host.
+The skill remains usable as plain markdown without MCP, using its bundled references as a clearly disclosed fallback. To get live source retrieval, the host must support remote HTTP MCP servers and connect `https://www.lukew.com/mcp`, preferably under the server name `lukew` to match the examples. Reuse an existing connection under another name. The MCP server exposes keyword and semantic-similarity search; MCP tool names may vary by host.
 
-**Codex CLI** — clone the repo anywhere, then point to it from your `AGENTS.md`:
+**Instruction-only hosts** — if your client cannot discover skill folders, clone the repo somewhere it can read, then point to it from the client's instruction file (for example, `AGENTS.md`). Replace the example path with the actual clone location:
 
 ```markdown
 ## Design reviews
@@ -65,13 +92,13 @@ For any UI/UX review or design advice, first read
 references/ files it says apply to the domain under review.
 ```
 
-Or make it an on-demand slash prompt: copy `SKILL.md` to `~/.codex/prompts/lukew.md` (and keep the repo cloned so the reference paths resolve), then invoke `/lukew` when you want a review.
+Keep the complete folder together so relative reference links resolve. This pointer loads instructions only; live retrieval still needs an MCP connection and a successful search.
 
-**ChatGPT** — create a Project (or a custom GPT) and upload the five `.md` files. Set the project instructions to: "For design reviews, follow SKILL.md exactly, consulting the uploaded reference files it names for the relevant domain." Connect the LukeW MCP server when the environment supports remote MCP; otherwise the uploaded references provide fallback coverage.
+**ChatGPT** — create a Project (or a custom GPT) and upload `SKILL.md` and all files in `references/`. Set the project instructions to: "For design reviews, follow SKILL.md exactly, consulting the uploaded reference files it names for the relevant domain." Connect the LukeW MCP server when the environment supports remote MCP; otherwise the uploaded references provide fallback coverage.
 
-**Cursor** — save `SKILL.md` as a rule at `.cursor/rules/lukew-design.mdc` with `description`-based (agent-requested) triggering, and keep the repo in your workspace so the agent can open the references.
+**Cursor** — keep the complete repository in your workspace and add a rule at `.cursor/rules/lukew-design.mdc` that points to its `SKILL.md`, using the instruction-only example above. Do not relocate only `SKILL.md` and leave its relative references behind.
 
-**GitHub Copilot** — add the same pointer paragraph as the Codex example to `.github/copilot-instructions.md`, with the repo cloned inside the workspace.
+**GitHub Copilot** — add the instruction-only pointer paragraph above to `.github/copilot-instructions.md`, with the repo cloned inside the workspace.
 
 **Any other agent** — worst case, concatenate everything into one file and paste it as a system prompt:
 
